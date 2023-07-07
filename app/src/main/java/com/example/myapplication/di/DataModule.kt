@@ -2,8 +2,9 @@ package com.example.myapplication.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.myapplication.data.NoteEntity
-import com.example.myapplication.data.NotesDataBase
+import com.example.myapplication.data.NoteDataBase
+import com.example.myapplication.data.local.entities.NoteEntity
+import com.example.myapplication.utils.Constants.NOTE_DATABASE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,11 +18,15 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providesDatabase(@ApplicationContext context: Context): NotesDataBase =
-        Room.databaseBuilder(context, NotesDataBase::class.java, "notes.db").allowMainThreadQueries().build()
+    fun providesDatabase(@ApplicationContext context: Context): NoteDataBase =
+        Room.databaseBuilder(context, NoteDataBase::class.java, NOTE_DATABASE)
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
-    fun providesNamesDao(dataBase: NotesDataBase) = dataBase.noteDao()
+    @Singleton
+    fun providesNamesDao(dataBase: NoteDataBase) = dataBase.noteDao()
 
     @Provides
     fun provideEntity() = NoteEntity()

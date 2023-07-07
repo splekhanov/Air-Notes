@@ -1,16 +1,17 @@
-package com.example.myapplication.data
+package com.example.myapplication.data.local.dao
 
 import androidx.room.*
+import com.example.myapplication.data.local.entities.NoteEntity
 import com.example.myapplication.utils.Constants.NOTE_TABLE
 
 @Dao
 interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNote(noteEntity: NoteEntity)
+    fun insertNote(noteEntity: NoteEntity)
 
     @Update
-    suspend fun updateNote(noteEntity: NoteEntity)
+    fun updateNote(noteEntity: NoteEntity)
 
     @Delete
     fun deleteNote(noteEntity: NoteEntity)

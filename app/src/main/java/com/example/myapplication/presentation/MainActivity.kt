@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainActivityBinding
+import com.example.myapplication.presentation.home.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -17,13 +19,25 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        replaceFragment(HomeFragment.newInstance())
+
+        replaceFragment(MainFragment.newInstance())
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        replaceFragment(MainFragment.newInstance())
+//    }
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentTransition = supportFragmentManager.beginTransaction()
-        fragmentTransition.add(R.id.fragmentHome, fragment)
+        fragmentTransition.add(R.id.fragment_main, fragment)
             .addToBackStack(fragment.javaClass.simpleName)
         fragmentTransition.commit()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+        finish()
     }
 }

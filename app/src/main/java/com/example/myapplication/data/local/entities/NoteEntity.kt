@@ -1,4 +1,4 @@
-package com.example.myapplication.data
+package com.example.myapplication.data.local.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -13,10 +13,10 @@ data class NoteEntity (
     var noteId: Int = 0,
 
     @ColumnInfo(name = "note_title")
-    var noteTitle: String? = null,
+    var noteTitle: String? = "",
 
     @ColumnInfo(name = "note_description")
-    var noteDescription: String? = null,
+    var noteDescription: String? = "",
 
 ):Serializable {
     override fun toString(): String {
