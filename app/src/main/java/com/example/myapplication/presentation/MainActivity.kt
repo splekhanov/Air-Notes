@@ -20,17 +20,13 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        replaceFragment(MainFragment.newInstance())
+        val mainFragment = MainFragment()
+        replaceFragment(mainFragment)
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        replaceFragment(MainFragment.newInstance())
-//    }
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentTransition = supportFragmentManager.beginTransaction()
-        fragmentTransition.add(R.id.fragment_main, fragment)
+        fragmentTransition.add(R.id.container, fragment)
             .addToBackStack(fragment.javaClass.simpleName)
         fragmentTransition.commit()
     }

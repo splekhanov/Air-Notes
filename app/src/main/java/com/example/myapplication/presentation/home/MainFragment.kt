@@ -6,19 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.local.entities.NoteEntity
 import com.example.myapplication.data.repo.NoteRepo
 import com.example.myapplication.databinding.FragmentMainBinding
+import com.example.myapplication.presentation.addNote.AddNoteFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    lateinit var binding: FragmentMainBinding
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var  repository: NoteRepo
@@ -30,21 +32,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     @Inject
     lateinit var note: NoteEntity
 
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            MainFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
+//    companion object {
+//        @JvmStatic
+//        fun newInstance() =
+//            MainFragment().apply {
+//                arguments = Bundle().apply {
+//                }
+//            }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -57,26 +59,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             "Встретить бабушку в аэропорту")
         repository.addNote(note)
 
+        // SHOW AVAILABLE NOTES USING RV
         collectNotes()
-        mock()
 
-        // FAB CREATE NOTE FRAGMENT
-//        binding.fabCreateNoteBtn.setOnClickListener {
-//            replaceFragment(CreateNoteFragment.newInstance(), true)
-//        }
-//
-//        binding.searchView.setOnQueryTextListener(object :
-//            SearchView.OnQueryTextListener,
-//            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(p0: String?): Boolean {
-//                viewModel.onSearchQueryChanged(p0.toString())
-//                return true
-//            }
-//        })
+        // CREATE NOTE FRAGMENT BY PRESSING NEW NOTE BUTTON
+        val button: FloatingActionButton = view.findViewById(R.id.btnAddNote)
+        button.setOnClickListener {
+            Log.e("AAA", "AddNewNoteButton pressed")
+            replaceFragment(AddNoteFragment())
+        }
     }
 
     private fun collectNotes(){
@@ -93,8 +84,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private fun mock() {
-
+    // OPEN NEW NOTE SCREEN
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransition.add(R.id.container, fragment)
+            .addToBackStack(fragment.javaClass.simpleName)
+        fragmentTransition.commit()
     }
 
     private fun setupRecyclerView(){
@@ -103,5 +98,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             adapter=noteAdapter
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

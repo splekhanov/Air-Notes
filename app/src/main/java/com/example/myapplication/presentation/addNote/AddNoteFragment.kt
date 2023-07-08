@@ -16,13 +16,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
     lateinit var binding: FragmentAddNoteBinding
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        initViews()
-//        collectNotes()
-//    }
-
     companion object {
         @JvmStatic
         fun newInstance() =
@@ -30,5 +23,15 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentAddNoteBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 }
