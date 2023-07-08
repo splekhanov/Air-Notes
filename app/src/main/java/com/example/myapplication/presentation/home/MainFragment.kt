@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.local.entities.NoteEntity
 import com.example.myapplication.data.repo.NoteRepo
+import com.example.myapplication.databinding.FragmentAddNoteBinding
 import com.example.myapplication.databinding.FragmentMainBinding
 import com.example.myapplication.presentation.addNote.AddNoteFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,8 +20,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private var _binding: FragmentMainBinding? = null
-    private val binding get() = _binding!!
+    lateinit var binding: FragmentMainBinding
 
     @Inject
     lateinit var  repository: NoteRepo
@@ -32,21 +32,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     @Inject
     lateinit var note: NoteEntity
 
-//    companion object {
-//        @JvmStatic
-//        fun newInstance() =
-//            MainFragment().apply {
-//                arguments = Bundle().apply {
-//                }
-//            }
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -98,10 +89,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             adapter=noteAdapter
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

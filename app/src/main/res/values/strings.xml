@@ -3,4 +3,5 @@
     <string name="name_hint">Enter your name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="zametka">Заметка, блять!</string>
 </resources>
