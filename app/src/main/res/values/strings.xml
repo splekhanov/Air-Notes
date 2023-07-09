@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="name_hint">Enter your name</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="zametka">Заметка, блять!</string>
+
+
+
+    <!-- HINTS -->
+    <string name="noteTitleHint">Название</string>
+    <string name="noteDescHint">Описание</string>
+    <string name="emptyMainScreenHolder">У вас еще нет заметок</string>
+    <string name="saveNoteHint">Сохранить заметку</string>
 </resources>

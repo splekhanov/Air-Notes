@@ -6,10 +6,12 @@ import javax.inject.Inject
 
 class NoteRepo @Inject constructor(private val noteDao: NoteDao) {
 
-    fun addNote(note: NoteEntity) = noteDao.insertNote(note)
-    fun updateNote(note: NoteEntity) = noteDao.updateNote(note)
-    fun deleteNote(note: NoteEntity) = noteDao.updateNote(note)
-    fun getNote(id: Int) = noteDao.getNote(id)
+    suspend fun addNote(note: NoteEntity) = noteDao.insertNote(note)
+    suspend fun updateNote(note: NoteEntity) = noteDao.updateNote(note)
+    suspend fun deleteNote(note: NoteEntity) = noteDao.updateNote(note)
+
+    suspend fun deleteAllNotes() = noteDao.deleteAllNotes()
+    suspend fun getNote(id: Int) = noteDao.getNote(id)
     fun getAllNotes() = noteDao.getAllNotes()
 
 }
