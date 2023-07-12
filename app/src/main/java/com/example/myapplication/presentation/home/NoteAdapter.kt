@@ -16,16 +16,25 @@ import javax.inject.Inject
 
 class NoteAdapter @Inject constructor(): RecyclerView.Adapter<NoteAdapter.NotesViewHolder>() {
 
-    private var onItemClickListener: ((NoteEntity) -> Unit)? = null
-    private lateinit var binding : ItemNoteBinding
-    private lateinit var context: Context
+    private val differCallback = object : DiffUtil.ItemCallback<NoteEntity>() {
+        override fun areItemsTheSame(oldItem: NoteEntity, newItem: NoteEntity): Boolean {
+            return oldItem.id == newItem.id
+        }
 
+        override fun areContentsTheSame(oldItem: NoteEntity, newItem: NoteEntity): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
 
         val binding =
             ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NotesViewHolder(binding)
     }
+
+    override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
         val note = differ.currentList[position]
@@ -41,23 +50,11 @@ class NoteAdapter @Inject constructor(): RecyclerView.Adapter<NoteAdapter.NotesV
         }
     }
 
-    override fun getItemCount(): Int = differ.currentList.size
-
     inner class NotesViewHolder(val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root)
 
+    // on item click listener
+    private var onItemClickListener: ((NoteEntity) -> Unit)? = null
     fun setOnItemClickListener(listener: (NoteEntity) -> Unit) {
         onItemClickListener = listener
     }
-
-    private val differCallback = object : DiffUtil.ItemCallback<NoteEntity>() {
-        override fun areItemsTheSame(oldItem: NoteEntity, newItem: NoteEntity): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: NoteEntity, newItem: NoteEntity): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-    val differ = AsyncListDiffer(this, differCallback)
 }
