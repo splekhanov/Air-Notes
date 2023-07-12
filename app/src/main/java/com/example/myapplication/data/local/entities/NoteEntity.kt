@@ -10,7 +10,7 @@ import java.io.Serializable
 data class NoteEntity (
 
     @PrimaryKey(autoGenerate = true)
-    var noteId: Int = 0,
+    var id: Int = 0,
 
     @ColumnInfo(name = "note_title")
     var noteTitle: String? = "",

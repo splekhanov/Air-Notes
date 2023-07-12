@@ -20,16 +20,16 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val mainFragment = MainFragment()
-        replaceFragment(mainFragment)
+//        val mainFragment = MainFragment()
+//        replaceFragment(mainFragment)
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransition = supportFragmentManager.beginTransaction()
-        fragmentTransition.add(R.id.container, fragment)
-            .addToBackStack(fragment.javaClass.simpleName)
-        fragmentTransition.commit()
-    }
+//    private fun replaceFragment(fragment: Fragment) {
+//        val fragmentTransition = supportFragmentManager.beginTransaction()
+//        fragmentTransition.add(R.id.container, fragment)
+//            .addToBackStack(fragment.javaClass.simpleName)
+//        fragmentTransition.commit()
+//    }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
