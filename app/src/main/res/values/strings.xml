@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">My Application</string>
 
-
     <!-- HINTS -->
     <string name="noteTitleHint">Название</string>
     <string name="noteDescHint">Описание</string>

@@ -20,8 +20,8 @@ interface NoteDao {
     suspend fun deleteAllNotes()
 
     @Query("SELECT * FROM $NOTE_TABLE ORDER BY id DESC")
-    fun getAllNotes() : MutableList<NoteEntity>
+    fun getAllNotes(): MutableList<NoteEntity>
 
     @Query("SELECT * FROM $NOTE_TABLE WHERE id like :id")
-    suspend fun getNote(id : Int) : NoteEntity
+    suspend fun getNote(id: Int): NoteEntity
 }

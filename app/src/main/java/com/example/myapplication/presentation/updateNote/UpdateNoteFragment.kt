@@ -1,19 +1,16 @@
 package com.example.myapplication.presentation.updateNote
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentAddNoteBinding
 import com.example.myapplication.databinding.FragmentUpdateNoteBinding
-import com.example.myapplication.presentation.addNote.AddNoteFragmentArgs
 import com.example.myapplication.presentation.home.MainFragmentArgs
 import com.example.myapplication.presentation.home.NoteViewModel
 import com.example.myapplication.utils.Focus
@@ -32,7 +29,6 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.e("AAA", "Метод onCreateView класса UpdateNoteFragment")
         // Inflate the layout for this fragment
         binding = FragmentUpdateNoteBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,7 +36,6 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("AAA", "Метод onViewCreated класса UpdateNoteFragment")
 
         // SAVE NOTE AND GO BACK TO THE MAIN SCREEN
         val saveNoteButton: FloatingActionButton = view.findViewById(R.id.saveNoteButton)
@@ -50,7 +45,6 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
 
         // receiving bundles here
         val note = args.note
-        Log.e("AAA", "NOTE + $note.noteTitle")
         val id = note!!.id
 
         with(binding) {

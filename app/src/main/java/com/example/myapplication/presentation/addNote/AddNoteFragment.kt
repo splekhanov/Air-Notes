@@ -1,39 +1,27 @@
 package com.example.myapplication.presentation.addNote
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.data.local.entities.NoteEntity
-import com.example.myapplication.data.repo.NoteRepo
 import com.example.myapplication.databinding.FragmentAddNoteBinding
-import com.example.myapplication.presentation.home.MainFragment
 import com.example.myapplication.presentation.home.NoteViewModel
 import com.example.myapplication.utils.Focus.openSoftKeyboard
 import com.example.myapplication.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
     private val viewModel: NoteViewModel by activityViewModels()
     lateinit var binding: FragmentAddNoteBinding
-    private val args: AddNoteFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +45,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         openSoftKeyboard(editNoteTitle)
 
         saveNoteButton.setOnClickListener {
-
             val (title, note) = getNoteContent()
 
             // check whether both title & desc is not empty

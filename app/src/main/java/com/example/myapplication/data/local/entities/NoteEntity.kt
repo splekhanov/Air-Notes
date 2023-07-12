@@ -7,7 +7,7 @@ import com.example.myapplication.utils.Constants.NOTE_TABLE
 import java.io.Serializable
 
 @Entity(tableName = NOTE_TABLE)
-data class NoteEntity (
+data class NoteEntity(
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
@@ -18,7 +18,7 @@ data class NoteEntity (
     @ColumnInfo(name = "note_description")
     var noteDescription: String? = "",
 
-):Serializable {
+    ) : Serializable {
     override fun toString(): String {
         return "$noteDescription"
     }

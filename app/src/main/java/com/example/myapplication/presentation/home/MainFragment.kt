@@ -1,7 +1,6 @@
 package com.example.myapplication.presentation.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.adapter.NoteAdapter
 import com.example.myapplication.data.local.entities.NoteEntity
 import com.example.myapplication.data.repo.NoteRepo
 import com.example.myapplication.databinding.FragmentMainBinding
@@ -39,7 +39,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.e("AAA", "Метод onCreateView класса MainFragment")
         // Inflate the layout for this fragment
         binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -47,7 +46,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("AAA", "Метод onViewCreated класса MainFragment")
 
         // SHOW AVAILABLE NOTES USING RV
         collectNotes()
@@ -57,7 +55,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         // GO TO CREATE NEW NOTE BY PRESSING NEW NOTE BUTTON
         val button: FloatingActionButton = view.findViewById(R.id.btnAddNote)
         button.setOnClickListener {
-            Log.e("AAA", "Нажата кнопка 'Добавить заметку'")
             findNavController().navigate(
                 R.id.action_mainFragment_to_addNoteFragment
             )
@@ -69,7 +66,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         noteAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("note", it)
-                Log.e("AAA", "Note: + ${it.noteTitle}")
             }
             findNavController().navigate(
                 R.id.action_mainFragment_to_updateNoteFragment,
