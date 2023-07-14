@@ -1,6 +1,7 @@
 package com.example.myapplication.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,10 +90,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun setupRecyclerView() = binding.rvNoteList.apply {
-        adapter = noteAdapter.apply {
-            layoutManager = LinearLayoutManager(activity)
-        }
-
+        adapter = noteAdapter
+        layoutManager = LinearLayoutManager(activity)
     }
 
     private fun initSwipeToDeleteNote() {
@@ -112,10 +111,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // get item position & delete notes
                 val position = viewHolder.adapterPosition
-                val notes = noteAdapter.differ.currentList[position]
+                val note = noteAdapter.differ.currentList[position]
                 viewModel.deleteNoteByID(
-                    notes.id
+                    note.id
                 )
+
                 Snackbar.make(
                     binding.root,
                     getString(R.string.note_deleted_msg),
@@ -123,10 +123,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 )
                     .apply {
                         setAction(getString(R.string.undo)) {
-                            viewModel.addNote(
-                                note.noteTitle!!,
-                                note.noteDescription!!
-                            )
+//                            viewModel.addNote(
+//                                note.noteTitle!!,
+//                                note.noteDescription!!
+//                            )
+                            Log.e("AAA", "Блок добавления")
                         }
                         show()
                     }
