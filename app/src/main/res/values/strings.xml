@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Lemon Notes</string>
 
-    <string name="appName">Lemon notes</string>
+    <string name="appName">Lemon Notes</string>
 
     <!-- HINTS -->
     <string name="noteTitleHint">Название</string>

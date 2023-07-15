@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
     app:startDestination="@id/mainFragment">
+
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.myapplication.presentation.home.MainFragment"
+        android:name="com.example.lemonnotes.presentation.home.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -17,11 +18,11 @@
             app:destination="@id/updateNoteFragment" />
         <argument
             android:name="note"
-            app:argType="com.example.myapplication.data.local.entities.NoteEntity" />
+            app:argType="com.example.lemonnotes.data.local.entities.NoteEntity" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.example.myapplication.presentation.addNote.AddNoteFragment"
+        android:name="com.example.lemonnotes.presentation.addNote.AddNoteFragment"
         android:label="fragment_add_note"
         tools:layout="@layout/fragment_add_note" >
         <action
@@ -29,13 +30,13 @@
             app:destination="@id/mainFragment" />
         <argument
             android:name="note"
-            app:argType="com.example.myapplication.data.local.entities.NoteEntity"
+            app:argType="com.example.lemonnotes.data.local.entities.NoteEntity"
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/updateNoteFragment"
-        android:name="com.example.myapplication.presentation.updateNote.UpdateNoteFragment"
+        android:name="com.example.lemonnotes.presentation.updateNote.UpdateNoteFragment"
         android:label="fragment_update_note"
         tools:layout="@layout/fragment_update_note" >
         <action
