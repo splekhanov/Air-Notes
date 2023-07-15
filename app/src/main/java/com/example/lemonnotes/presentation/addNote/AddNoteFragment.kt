@@ -43,11 +43,17 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
         saveNoteButton.setOnClickListener {
             val (title, note) = getNoteContent()
-
-            viewModel.addNote(title, note).also {
-                requireActivity().toast(getString(R.string.saveNoteMsg))
+            when {
+                title.isEmpty() && note.isEmpty() -> {
+                    findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
+                }
+                else -> {
+                    viewModel.addNote(title, note).also {
+                        requireActivity().toast(getString(R.string.saveNoteMsg))
+                    }
+                    findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
+                }
             }
-            findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
         }
     }
 
