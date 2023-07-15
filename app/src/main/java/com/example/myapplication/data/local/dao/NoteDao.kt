@@ -1,5 +1,6 @@
 package com.example.myapplication.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.myapplication.data.local.entities.NoteEntity
 import com.example.myapplication.utils.Constants.NOTE_TABLE
@@ -20,7 +21,7 @@ interface NoteDao {
     suspend fun deleteAllNotes()
 
     @Query("SELECT * FROM $NOTE_TABLE ORDER BY id DESC")
-    fun getAllNotes(): MutableList<NoteEntity>
+    fun getAllNotes(): LiveData<List<NoteEntity>>
 
     @Query("SELECT * FROM $NOTE_TABLE WHERE id like :id")
     suspend fun getNote(id: Int): NoteEntity

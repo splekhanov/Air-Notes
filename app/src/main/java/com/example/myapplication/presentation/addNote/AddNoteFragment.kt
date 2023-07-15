@@ -27,7 +27,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.e("AAA", "Метод onCreateView класса AddNoteFragment")
         // Inflate the layout for this fragment
         binding = FragmentAddNoteBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -36,7 +35,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("AAA", "Метод onViewCreated класса AddNoteFragment")
 
         // SAVE NOTE AND GO BACK TO THE MAIN SCREEN
         val saveNoteButton: FloatingActionButton = view.findViewById(R.id.saveNoteButton)
@@ -47,21 +45,10 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         saveNoteButton.setOnClickListener {
             val (title, note) = getNoteContent()
 
-            // check whether both title & desc is not empty
-            when {
-                title.isEmpty() -> {
-                    requireActivity().toast(getString(R.string.saveEmptyNoteMsg))
-                }
-                note.isEmpty() -> {
-                    requireActivity().toast(getString(R.string.saveEmptyNoteMsg))
-                }
-                else -> {
-                    viewModel.addNote(title, note).also {
-                        requireActivity().toast(getString(R.string.saveNoteMsg))
-                    }
-                    findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
-                }
+            viewModel.addNote(title, note).also {
+                requireActivity().toast(getString(R.string.saveNoteMsg))
             }
+            findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
         }
     }
 

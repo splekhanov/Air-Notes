@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +17,13 @@ import com.example.myapplication.adapter.NoteAdapter
 import com.example.myapplication.data.local.entities.NoteEntity
 import com.example.myapplication.data.repo.NoteRepo
 import com.example.myapplication.databinding.FragmentMainBinding
+import com.example.myapplication.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.BaseItemAnimator
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,8 +35,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     @Inject
     lateinit var noteRepo: NoteRepo
 
-    @Inject
-    lateinit var noteAdapter: NoteAdapter
+    private val noteAdapter by lazy { NoteAdapter(arrayListOf()) }
 
     @Inject
     lateinit var note: NoteEntity
@@ -48,9 +52,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // SHOW AVAILABLE NOTES USING RV
+        setupRecyclerView()
         collectNotes()
-        initSwipeToDeleteNote()
         onClickNote()
 
         // GO TO CREATE NEW NOTE BY PRESSING NEW NOTE BUTTON
@@ -77,24 +80,30 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun collectNotes() {
         binding.apply {
-            if (noteRepo.getAllNotes().isNotEmpty()) {
-                rvNoteList.visibility = View.VISIBLE
-                tvEmptyText.visibility = View.GONE
-                noteAdapter.differ.submitList(noteRepo.getAllNotes())
-                setupRecyclerView()
-            } else {
-                rvNoteList.visibility = View.GONE
-                tvEmptyText.visibility = View.VISIBLE
-            }
+            viewModel.getAllData.observe(viewLifecycleOwner, Observer {
+                if(it.isNotEmpty()) {
+                    rvNoteList.visibility = View.VISIBLE
+                    tvEmptyText.visibility = View.GONE
+                    noteAdapter.setList(it)
+                } else {
+                    rvNoteList.visibility = View.GONE
+                    tvEmptyText.visibility = View.VISIBLE
+                }
+
+            })
         }
     }
 
     private fun setupRecyclerView() = binding.rvNoteList.apply {
         adapter = noteAdapter
         layoutManager = LinearLayoutManager(activity)
+        itemAnimator = SlideInUpAnimator().apply {
+            addDuration = 300
+        }
+        initSwipeToDeleteNote(this)
     }
 
-    private fun initSwipeToDeleteNote() {
+    private fun initSwipeToDeleteNote(recyclerView: RecyclerView) {
         // init item touch callback for swipe action
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
@@ -111,32 +120,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // get item position & delete notes
                 val position = viewHolder.adapterPosition
-                val note = noteAdapter.differ.currentList[position]
-                viewModel.deleteNoteByID(
-                    note.id
-                )
-
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.note_deleted_msg),
-                    Snackbar.LENGTH_LONG
-                )
-                    .apply {
-                        setAction(getString(R.string.undo)) {
-//                            viewModel.addNote(
-//                                note.noteTitle!!,
-//                                note.noteDescription!!
-//                            )
-                            Log.e("AAA", "Блок добавления")
-                        }
-                        show()
-                    }
+                val note = noteAdapter.noteList[position]
+                viewModel.deleteNoteByID(note.id).also {
+                    requireActivity().toast(getString(R.string.note_deleted_msg))
+                }
             }
         }
-
         // attach swipe callback to rv
         ItemTouchHelper(itemTouchHelperCallback).apply {
-            attachToRecyclerView(binding.rvNoteList)
+            attachToRecyclerView(recyclerView)
         }
     }
 }
