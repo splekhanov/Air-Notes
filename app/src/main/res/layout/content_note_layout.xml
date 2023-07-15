@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_sea_blue">
 
     <LinearLayout
         android:id="@+id/addNoteToolbar"
@@ -11,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/toolbar_background"
+        android:background="@color/sea_blue"
         app:layout_constraintBottom_toTopOf="@+id/noteTitleContainer">
 
 
@@ -19,22 +20,22 @@
             android:id="@+id/saveNoteButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
             android:clickable="true"
             android:focusable="true"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:maxImageSize="58dp"
             android:contentDescription="@string/saveNoteHint"
-            android:src="?attr/actionModeCloseDrawable"
-            app:fabSize="mini"
-            app:maxImageSize="18dp"
-            app:backgroundTint="@color/white" />
+            android:background="@color/white"
+            android:src="@drawable/update_note_button_24" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/noteTitleContainer"
-        app:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -54,10 +55,11 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:background="@android:color/transparent"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/noteTitleHint"
-            android:textColorHint="@color/gray"
+            android:textColorHint="@color/hint_gray"
             android:maxLines="1"
-            android:textColor="@color/black"
+            android:textColor="@color/gray"
             android:textSize="18sp"
             android:textStyle="normal"
             android:inputType="textMultiLine"/>
@@ -88,8 +90,9 @@
             android:paddingEnd="8dp"
             android:background="@android:color/transparent"
             android:hint="@string/noteDescHint"
-            android:textColorHint="@color/light_grey"
+            android:textColorHint="@color/hint_gray"
             android:textColor="@color/black"
+            android:fontFamily="@font/roboto_regular"
             android:textSize="18sp"
             android:textStyle="normal"
             android:gravity="top"

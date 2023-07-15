@@ -4,13 +4,13 @@
     <string name="appName">Lemon Notes</string>
 
     <!-- HINTS -->
-    <string name="noteTitleHint">Название</string>
-    <string name="noteDescHint">Описание</string>
-    <string name="emptyMainScreenHolder">У вас еще нет заметок</string>
-    <string name="saveNoteHint">Сохранить заметку</string>
-    <string name="saveEmptyNoteMsg">Название заметки или описание не могут быть пустыми</string>
-    <string name="saveNoteMsg">Сохранено</string>
+    <string name="noteTitleHint">Title</string>
+    <string name="noteDescHint">Description</string>
+    <string name="emptyMainScreenHolder">Create your first note</string>
+    <string name="saveNoteHint">Save note</string>
+    <string name="saveEmptyNoteMsg">Note cannot be empty</string>
+    <string name="saveNoteMsg">Saved</string>
 
-    <string name="undo">Вернуть</string>
-    <string name="note_deleted_msg">Заметка удалена</string>
+    <string name="undo">Undo</string>
+    <string name="note_deleted_msg">Deleted</string>
 </resources>

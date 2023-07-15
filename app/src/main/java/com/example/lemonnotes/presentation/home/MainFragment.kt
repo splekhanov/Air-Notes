@@ -19,6 +19,7 @@ import com.example.lemonnotes.databinding.FragmentMainBinding
 import com.example.lemonnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import javax.inject.Inject
 
@@ -91,7 +92,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun setupRecyclerView() = binding.rvNoteList.apply {
         adapter = noteAdapter
         layoutManager = LinearLayoutManager(activity)
-        itemAnimator = SlideInUpAnimator().apply {
+        itemAnimator = FadeInAnimator().apply {
             addDuration = 300
         }
         initSwipeToDeleteNote(this)

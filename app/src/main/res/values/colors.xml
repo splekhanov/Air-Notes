@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="olive">#9EB25D</color>
-    <color name="gray">#707070</color>
-    <color name="dark_gray">#454545</color>
-    <color name="light_grey">#a1a1a1</color>
-    <color name="orange">#C97C5D</color>
-    <color name="white">#F0F3F5</color>
+    <color name="sea_blue">#67909E</color>
+    <color name="light_sea_blue">#E6ECEE</color>
+    <color name="gray">#404648</color>
+    <color name="dark_gray">#5A6062</color>
+    <color name="light_grey">#C6C6C6</color>
+    <color name="white">#F0F4F5</color>
     <color name="black">#FF000000</color>
+    <color name="hint_gray">#A2A9AB</color>
 </resources>
