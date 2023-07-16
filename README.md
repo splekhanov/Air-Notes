@@ -13,4 +13,4 @@
 
 # Demo
 
- <img src="app/demo/lemonNotesDemo.gif" width="300"/>
+ <img src="app/demo/lemonNotesDemo2.gif" width="300"/>
