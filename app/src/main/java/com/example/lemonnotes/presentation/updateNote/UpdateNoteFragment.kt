@@ -39,8 +39,6 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         val saveNoteButton: FloatingActionButton = view.findViewById(R.id.saveNoteButton)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
 
-        Focus.openSoftKeyboard(editNoteTitle)
-
         // receiving note args from navigation component
         val note = args.note
         val id = note!!.id
