@@ -80,6 +80,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     rvNoteList.visibility = View.VISIBLE
                     tvEmptyText.visibility = View.GONE
                     noteAdapter.setList(it)
+                    noteAdapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+                        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                            binding.rvNoteList.smoothScrollToPosition(0)
+                        }
+                    })
                 } else {
                     rvNoteList.visibility = View.GONE
                     tvEmptyText.visibility = View.VISIBLE
