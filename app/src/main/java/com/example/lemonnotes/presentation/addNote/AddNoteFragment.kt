@@ -2,6 +2,7 @@ package com.example.lemonnotes.presentation.addNote
 
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,10 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         // SAVE NOTE AND GO BACK TO THE MAIN SCREEN
         val saveNoteButton: FloatingActionButton = view.findViewById(R.id.saveNoteButton)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
+        val editNoteDescription: EditText = view.findViewById(R.id.editDescription)
+
+        editNoteTitle.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        editNoteDescription.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
 
         openSoftKeyboard(editNoteTitle)
 
@@ -58,8 +63,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
                         requireActivity().toast(getString(R.string.saveNoteMsg))
                     }
                     findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
-                    val ts = timestamp.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
-                    Log.e("AAA", "The date is: $ts}")
                 }
             }
         }

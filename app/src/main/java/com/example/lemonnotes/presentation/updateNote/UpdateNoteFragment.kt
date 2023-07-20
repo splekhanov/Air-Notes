@@ -1,6 +1,8 @@
 package com.example.lemonnotes.presentation.updateNote
 
 import android.os.Bundle
+import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.lemonnotes.R
+import com.example.lemonnotes.data.local.entities.NoteEntity
 import com.example.lemonnotes.databinding.FragmentUpdateNoteBinding
 import com.example.lemonnotes.presentation.home.MainFragmentArgs
 import com.example.lemonnotes.presentation.home.NoteViewModel
@@ -39,6 +42,10 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
 
         val saveNoteButton: FloatingActionButton = view.findViewById(R.id.saveNoteButton)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
+        val editNoteDescription: EditText = view.findViewById(R.id.editDescription)
+
+        editNoteTitle.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        editNoteDescription.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
 
         // receiving note args from navigation component
         val note = args.note
@@ -49,8 +56,17 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
             noteLayout.editDescription.setText(note.noteDescription)
 
             saveNoteButton.setOnClickListener {
-                val (title, note, date) = getNoteContent()
-                viewModel.updateNotes(id, title, note, date).also {
+                var (title, desc, date) = getNoteContent(note)
+                var updatedDate = LocalDateTime.now()
+
+                //SET NEW DATETIME ONLY IF NOTE HAS BEEN CHANGED
+                if(title.equals(note.noteTitle) && desc.equals(note.noteDescription)) {
+                    date = note.date
+                } else {
+                    date = updatedDate
+                }
+
+                viewModel.updateNotes(id, title, desc, date).also {
                     requireActivity().toast(getString(R.string.saveNoteMsg))
                 }
                 findNavController().navigate(R.id.action_updateNoteFragment_to_mainFragment)
@@ -58,11 +74,11 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         }
     }
 
-    private fun getNoteContent() = binding.noteLayout.let {
+    private fun getNoteContent(note: NoteEntity) = binding.noteLayout.let {
         Triple(
             it.editTitle.text.toString(),
             it.editDescription.text.toString(),
-            LocalDateTime.now()
+            note.date
         )
     }
 }

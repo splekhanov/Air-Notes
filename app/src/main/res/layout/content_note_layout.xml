@@ -99,7 +99,7 @@
             android:textStyle="normal"
             android:gravity="top"
             android:scrollbars="vertical"
-            android:inputType="textMultiLine|textCapSentences"
+            android:inputType="textCapSentences|textMultiLine"
             android:maxLines="50"
             android:imeOptions="actionDone"/>
 
