@@ -1,14 +1,11 @@
 package com.example.lemonnotes.presentation.addNote
 
-import android.os.Build
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,9 +16,7 @@ import com.example.lemonnotes.utils.Focus.openSoftKeyboard
 import com.example.lemonnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.Instant
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class AddNoteFragment : Fragment(R.layout.fragment_add_note) {

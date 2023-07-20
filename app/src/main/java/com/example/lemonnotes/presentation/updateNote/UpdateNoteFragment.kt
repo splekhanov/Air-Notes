@@ -2,7 +2,6 @@ package com.example.lemonnotes.presentation.updateNote
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.example.lemonnotes.data.local.entities.NoteEntity
 import com.example.lemonnotes.databinding.FragmentUpdateNoteBinding
 import com.example.lemonnotes.presentation.home.MainFragmentArgs
 import com.example.lemonnotes.presentation.home.NoteViewModel
-import com.example.lemonnotes.utils.Focus
 import com.example.lemonnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,7 +1,6 @@
 package com.example.lemonnotes.presentation.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +20,6 @@ import com.example.lemonnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import java.time.LocalDateTime
 import javax.inject.Inject
 
 @AndroidEntryPoint
