@@ -17,6 +17,7 @@ import com.example.lemonnotes.utils.Focus
 import com.example.lemonnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDateTime
 
 @AndroidEntryPoint
 class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
@@ -48,8 +49,8 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
             noteLayout.editDescription.setText(note.noteDescription)
 
             saveNoteButton.setOnClickListener {
-                val (title, note) = getNoteContent()
-                viewModel.updateNotes(id, title, note).also {
+                val (title, note, date) = getNoteContent()
+                viewModel.updateNotes(id, title, note, date).also {
                     requireActivity().toast(getString(R.string.saveNoteMsg))
                 }
                 findNavController().navigate(R.id.action_updateNoteFragment_to_mainFragment)
@@ -58,9 +59,10 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
     }
 
     private fun getNoteContent() = binding.noteLayout.let {
-        Pair(
+        Triple(
             it.editTitle.text.toString(),
-            it.editDescription.text.toString()
+            it.editDescription.text.toString(),
+            LocalDateTime.now()
         )
     }
 }

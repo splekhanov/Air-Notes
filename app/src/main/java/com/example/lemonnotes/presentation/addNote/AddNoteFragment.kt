@@ -1,10 +1,13 @@
 package com.example.lemonnotes.presentation.addNote
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +18,9 @@ import com.example.lemonnotes.utils.Focus.openSoftKeyboard
 import com.example.lemonnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
@@ -42,25 +48,28 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         openSoftKeyboard(editNoteTitle)
 
         saveNoteButton.setOnClickListener {
-            val (title, note) = getNoteContent()
+            val (title, note, timestamp) = getNoteContent()
             when {
                 title.isEmpty() && note.isEmpty() -> {
                     findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
                 }
                 else -> {
-                    viewModel.addNote(title, note).also {
+                    viewModel.addNote(title, note, timestamp).also {
                         requireActivity().toast(getString(R.string.saveNoteMsg))
                     }
                     findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
+                    val ts = timestamp.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                    Log.e("AAA", "The date is: $ts}")
                 }
             }
         }
     }
 
     private fun getNoteContent() = binding.noteLayout.let {
-        Pair(
+        Triple(
             it.editTitle.text.toString(),
-            it.editDescription.text.toString()
+            it.editDescription.text.toString(),
+            LocalDateTime.now()
         )
     }
 }
