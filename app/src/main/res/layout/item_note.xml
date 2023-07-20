@@ -35,7 +35,7 @@
                 android:paddingEnd="4dp"
                 android:gravity="center_vertical"
                 android:text=""
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"

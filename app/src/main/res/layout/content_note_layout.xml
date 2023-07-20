@@ -54,17 +54,18 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/roboto_medium"
             android:hint="@string/noteTitleHint"
             android:textColorHint="@color/hint_gray"
             android:gravity="start"
             android:textColor="@color/gray"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="normal"
-            android:inputType="textCapSentences|textMultiLine"
+            android:inputType="textCapSentences"
             android:maxLength="65"
-            android:maxLines="3"
-            android:cursorVisible="true"/>/>
+            android:maxLines="1"
+            android:cursorVisible="true"
+            android:imeOptions="actionNext" />
     </LinearLayout>
 
     <LinearLayout
@@ -86,7 +87,7 @@
         <EditText
             android:id="@+id/editDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:background="@android:color/transparent"
@@ -94,12 +95,13 @@
             android:textColorHint="@color/hint_gray"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_regular"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="normal"
             android:gravity="top"
             android:scrollbars="vertical"
-            android:inputType="textMultiLine"
-            android:maxLines="50"/>
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLines="50"
+            android:imeOptions="actionDone"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
