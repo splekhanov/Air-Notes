@@ -1,14 +1,11 @@
 package com.example.lemonnotes.data.local.entities
 
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.lemonnotes.utils.Constants.NOTE_TABLE
-import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @Entity(tableName = NOTE_TABLE)
 data class NoteEntity(
