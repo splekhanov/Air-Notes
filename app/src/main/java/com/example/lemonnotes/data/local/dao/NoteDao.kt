@@ -20,7 +20,7 @@ interface NoteDao {
     @Query("DELETE FROM $NOTE_TABLE")
     suspend fun deleteAllNotes()
 
-    @Query("SELECT * FROM $NOTE_TABLE ORDER BY date DESC")
+    @Query("SELECT * FROM $NOTE_TABLE ORDER BY id DESC")
     fun getAllNotes(): LiveData<List<NoteEntity>>
 
     @Query("SELECT * FROM $NOTE_TABLE WHERE id like :id")
