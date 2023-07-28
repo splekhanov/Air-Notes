@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -47,11 +48,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val kebab: FloatingActionButton = view.findViewById(R.id.kebab)
+        val button: FloatingActionButton = view.findViewById(R.id.btnAddNote)
+
+        showBottomSheetDialog(kebab)
         setupRecyclerView()
         collectNotes()
         onClickNote()
 
-        val button: FloatingActionButton = view.findViewById(R.id.btnAddNote)
         button.setOnClickListener {
             findNavController().navigate(
                 R.id.action_mainFragment_to_addNoteFragment
@@ -128,6 +132,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         // attach swipe callback to rv
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(recyclerView)
+        }
+    }
+
+    private fun showBottomSheetDialog(kebab:FloatingActionButton) {
+        val bottomSheetDialog = ModalBottomSheet()
+        kebab.setOnClickListener {
+            bottomSheetDialog.show(parentFragmentManager, bottomSheetDialog.tag)
         }
     }
 }
