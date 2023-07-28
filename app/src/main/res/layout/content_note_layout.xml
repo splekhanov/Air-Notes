@@ -17,6 +17,22 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/backToNotesList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:layout_gravity="center"
+            app:elevation="0dp"
+            app:fabCustomSize="48dp"
+            app:maxImageSize="40dp"
+            android:contentDescription="@string/backToNotes"
+            android:src="@drawable/baseline_arrow_back_24"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/saveNoteButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -25,12 +41,14 @@
             android:focusable="true"
             android:layout_weight="1"
             android:elevation="0dp"
+            android:layout_gravity="center"
             app:elevation="0dp"
-            app:fabSize="normal"
-            app:maxImageSize="58dp"
+            app:fabCustomSize="48dp"
+            app:maxImageSize="36dp"
             android:contentDescription="@string/saveNoteHint"
-            android:background="@color/white"
-            android:src="@drawable/update_note_button_24" />
+            app:tint="@color/fab_color"
+            android:src="@drawable/baseline_save_alt_24"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </LinearLayout>
 
@@ -98,10 +116,8 @@
             android:textSize="16sp"
             android:textStyle="normal"
             android:gravity="top"
-            android:scrollbars="vertical"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLines="50"
-            android:imeOptions="actionDone"/>
-
+            android:imeOptions="actionNone"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

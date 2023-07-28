@@ -1,5 +1,5 @@
-# Lemon Notes App
-**Lemon Notes** is a light note 📝 Android application built to describe the use of Modern Android development tools.
+# Air Notes App
+**Air Notes** is a light note 📝 Android application built to describe the use of Modern Android development tools.
 
 ## Build With 🛠
 - Kotlin

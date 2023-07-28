@@ -1,7 +1,8 @@
 package com.example.lemonnotes.presentation.addNote
 
 import android.os.Bundle
-import android.text.InputType
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,14 +40,21 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
         // SAVE NOTE AND GO BACK TO THE MAIN SCREEN
         val saveNoteButton: FloatingActionButton = view.findViewById(R.id.saveNoteButton)
+        val backToNotesListButton: FloatingActionButton = view.findViewById(R.id.backToNotesList)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
         val editNoteDescription: EditText = view.findViewById(R.id.editDescription)
 
-        editNoteTitle.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-        editNoteDescription.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-
         openSoftKeyboard(editNoteTitle)
 
+        saveNoteButton.isEnabled = false
+        setupOnTextChangedListeners(editNoteTitle, editNoteDescription, saveNoteButton)
+
+        // BACK TO NOTES LIST BUTTON
+        backToNotesListButton.setOnClickListener {
+            findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
+        }
+
+        // SAVE NOTE BUTTON
         saveNoteButton.setOnClickListener {
             val (title, note, timestamp) = getNoteContent()
             when {
@@ -69,5 +77,40 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
             it.editDescription.text.toString(),
             LocalDateTime.now()
         )
+    }
+
+    private fun setupOnTextChangedListeners(editNoteTitle : EditText,
+                                            editNoteDescription : EditText,
+                                            saveNoteButton : FloatingActionButton) {
+        editNoteTitle.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if(editNoteTitle.text.isNotEmpty()) {
+                    saveNoteButton.isEnabled = true
+                } else if (editNoteTitle.text.isEmpty() && editNoteDescription.text.isEmpty()) {
+                    saveNoteButton.isEnabled = false
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+
+        editNoteDescription.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if(editNoteDescription.text.isNotEmpty()) {
+                    saveNoteButton.isEnabled = true
+                } else if (editNoteDescription.text.isEmpty() && editNoteTitle.text.isEmpty()) {
+                    saveNoteButton.isEnabled = false
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
     }
 }

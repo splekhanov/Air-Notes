@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId 'com.example.lemonnotes'
-        minSdk 24
+        minSdk 27
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -32,6 +32,14 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    tasks.withType(Test) {
+        useJUnitPlatform()
+        testLogging {
+            exceptionFormat "full"
+            events "started", "skipped", "passed", "failed"
+            showStandardStreams true
+        }
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -64,9 +72,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
 
     // Testing
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+    testImplementation 'org.mockito:mockito-core:5.4.0'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:5.0.0'
 
     //hilt
     implementation 'com.google.dagger:hilt-android:2.45'
@@ -74,8 +82,8 @@ dependencies {
 
     //room
     implementation 'androidx.room:room-ktx:2.5.2'
-    kapt 'androidx.room:room-compiler:2.5.1'
-    androidTestImplementation 'androidx.room:room-testing:2.5.1'
+    kapt 'androidx.room:room-compiler:2.5.2'
+    androidTestImplementation 'androidx.room:room-testing:2.5.2'
 
     // RecyclerView Animator
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
