@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">Lemon Notes</string>
-
-    <string name="appName">Lemon Notes</string>
+    <string name="appName">Air Notes</string>
 
     <!-- HINTS -->
     <string name="noteTitleHint">Title</string>

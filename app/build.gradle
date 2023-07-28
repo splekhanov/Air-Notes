@@ -14,7 +14,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId 'com.example.lemonnotes'
+        applicationId 'com.example.airnotes'
         minSdk 27
         targetSdk 33
         versionCode 1
