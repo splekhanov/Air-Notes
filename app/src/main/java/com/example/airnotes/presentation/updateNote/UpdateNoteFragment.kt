@@ -98,9 +98,7 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
                 var updatedDate = LocalDateTime.now()
 
                 //SET NEW DATETIME ONLY IF NOTE HAS BEEN CHANGED
-                if(title.equals(note.noteTitle) && desc.equals(note.noteDescription)) {
-                    date = note.date
-                } else {
+                if(title != note.noteTitle && desc != note.noteDescription) {
                     date = updatedDate
                 }
 
