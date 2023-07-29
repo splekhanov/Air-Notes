@@ -13,4 +13,15 @@
 
     <string name="undo">Undo</string>
     <string name="note_deleted_msg">Deleted</string>
+
+    <!-- STUBS -->
+    <string name="dateTimeStub">29 Jul 2023 9:36 PM</string>
+    <string name="noteTitleStub">Important note</string>
+    <string name="noteDescStub">Some description</string>
+
+    <!-- DATES -->
+    <string name="today_us">Today</string>
+    <string name="today_ru">Сегодня</string>
+    <string name="yesterday_us">Yesterday</string>
+    <string name="yesterday_ru">Вчера</string>
 </resources>
