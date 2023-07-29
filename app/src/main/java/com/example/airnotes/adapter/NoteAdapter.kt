@@ -36,30 +36,10 @@ class NoteAdapter (var noteList : List<NoteEntity>) : RecyclerView.Adapter<NoteA
             tvTitle.text = item.noteTitle
             tvDesc.text = item.noteDescription
 
-            val noteDate = item.date
-            val locale = Locale.getDefault()
-            var today = context.resources.getString(R.string.today_us)
-            var yesterday = context.resources.getString(R.string.yesterday_us)
-
-            var formatter = DateTimeFormatter.ofPattern("dd LLL yyyy hh:mm a", locale)
-            if(locale.language.equals("ru")) {
-                formatter = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm", locale)
-                today = context.resources.getString(R.string.today_ru)
-                yesterday = context.resources.getString(R.string.yesterday_ru)
-            }
-
-            var formattedDate = noteDate.format(formatter)
-
-
-            if (isToday(noteDate)) {
-                formattedDate = today
-            } else if(isYesterday(noteDate)) {
-                formattedDate = yesterday
-            }
-
+            var formattedDate = getFormattedDate(item)
             date.text = formattedDate
 
-            // on item click
+            // ON LIST ITEM CLICK
             holder.itemView.setOnClickListener {
                 onItemClickListener?.let { it(item) }
             }
@@ -79,5 +59,32 @@ class NoteAdapter (var noteList : List<NoteEntity>) : RecyclerView.Adapter<NoteA
         val differResult = DiffUtil.calculateDiff(diffUtil)
         this.noteList = list
         differResult.dispatchUpdatesTo(this)
+    }
+
+    fun getFormattedDate(note : NoteEntity) : String {
+        val noteDate = note.date
+        val locale = Locale.getDefault()
+
+        // US LOCALE DATE FORMAT BY DEFAULT
+        var today = context.resources.getString(R.string.today_us)
+        var yesterday = context.resources.getString(R.string.yesterday_us)
+        var formatter = DateTimeFormatter.ofPattern("dd LLL yyyy hh:mm a", locale)
+
+        // RU LOCALE FORMAT DATE SUPPORT
+        if(locale.language.equals("ru")) {
+            formatter = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm", locale)
+            today = context.resources.getString(R.string.today_ru)
+            yesterday = context.resources.getString(R.string.yesterday_ru)
+        }
+
+        var formattedDate = noteDate.format(formatter)
+
+        // SHOW TODAY OR YESTERDAY INSTEAD OF FULL DATE IF THE NOTE IS FRESH
+        if (isToday(noteDate)) {
+            formattedDate = today
+        } else if(isYesterday(noteDate)) {
+            formattedDate = yesterday
+        }
+        return formattedDate
     }
 }
