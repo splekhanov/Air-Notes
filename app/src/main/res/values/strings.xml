@@ -5,6 +5,7 @@
     <string name="noteTitleHint">Title</string>
     <string name="noteDescHint">Description</string>
     <string name="emptyMainScreenHolder">Create your first note</string>
+    <string name="bottomSheet">Open bottom sheet with settings</string>
     <string name="backToNotes">Back to notes list</string>
     <string name="saveNoteHint">Save note</string>
     <string name="saveEmptyNoteMsg">Note cannot be empty</string>

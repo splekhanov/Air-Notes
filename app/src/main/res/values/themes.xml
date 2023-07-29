@@ -5,7 +5,10 @@
         <item name="colorPrimary">@color/gray</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="colorPrimaryDark">@color/dark_gray</item>
-        <item name="colorAccent">@color/sea_blue</item>
-        <item name="backgroundTint">@color/sea_blue</item>
+        <item name="colorAccent">@color/pink</item>
+        <item name="backgroundTint">@color/dark_blue</item>
+        <!-- Status bar color. -->
+        <item name="android:navigationBarColor">@color/light_blue</item>
+        <item name="android:colorEdgeEffect">@color/medium_blue</item>
     </style>
 </resources>

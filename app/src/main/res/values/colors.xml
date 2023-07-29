@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="sea_blue">#67909E</color>
-    <color name="light_sea_blue">#E6ECEE</color>
+    <color name="dark_blue">#6cabd1</color>
+    <color name="darkness_blue">#dd8586</color>
+    <color name="medium_blue">#EDEADE</color>
+    <color name="light_blue">#EFEEE9</color>
+    <color name="beige">#E3E0D5</color>
+    <color name="pink">#84ad46</color>
+    <color name="light_pink">#f8e3e3</color>
+    <color name="air_white">#ffffff</color>
+    <color name="light_green">#ecf4c5</color>
+
     <color name="gray">#404648</color>
     <color name="dark_gray">#5A6062</color>
     <color name="light_grey">#C6C6C6</color>
     <color name="white">#F0F4F5</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#111111</color>
     <color name="hint_gray">#A2A9AB</color>
+    <color name="barsColor">#595A6062</color>
 </resources>

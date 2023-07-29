@@ -1,5 +1,6 @@
 package com.example.airnotes.presentation.home
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -104,6 +105,22 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             addDuration = 300
         }
         initSwipeToDeleteNote(this)
+
+        // LISTEN NOTES LIST SCROLL TO CHANGE THE TOOLBAR BACKGROUND IF NOTES ARE UNDER IT
+        this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if(recyclerView.canScrollVertically(-1)) {
+                    binding.toolbar.setBackgroundResource(R.color.medium_blue)
+                    binding.kebab.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.medium_blue))
+                } else {
+                    binding.toolbar.setBackgroundResource(R.color.light_blue)
+                    binding.kebab.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_blue))
+                }
+            }
+        })
     }
 
     private fun initSwipeToDeleteNote(recyclerView: RecyclerView) {
@@ -129,7 +146,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 }
             }
         }
-        // attach swipe callback to rv
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(recyclerView)
         }

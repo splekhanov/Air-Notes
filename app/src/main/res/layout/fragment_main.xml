@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="MainFragment"
+    android:background="@color/light_blue"
     tools:context=".presentation.home.MainFragment">
 
 
@@ -12,7 +13,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/sea_blue"
+        android:background="@color/light_blue"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -21,28 +22,31 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
             android:gravity="center_vertical"
             android:textSize="24sp"
             android:textStyle="normal"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/white"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/black"
             android:text="@string/appName" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/kebab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
             android:clickable="true"
             android:focusable="true"
             android:elevation="0dp"
             app:elevation="0dp"
             app:fabCustomSize="48dp"
             app:maxImageSize="48dp"
+            app:borderWidth="0dp"
+            app:backgroundTint="@color/light_blue"
             android:layout_gravity="end|center_vertical"
-            android:contentDescription="@string/backToNotes"
+            android:contentDescription="@string/bottomSheet"
             android:src="@drawable/ic_kebab_24"/>
     </FrameLayout>
 
@@ -59,7 +63,7 @@
         android:paddingEnd="4dp"
         android:paddingBottom="28dp"
         android:clipToPadding="false"
-        android:background="@color/light_sea_blue"
+        android:background="@color/light_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +96,7 @@
         android:focusable="true"
         android:scaleType="center"
         android:src="@drawable/add_note_button"
+        app:tint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:maxImageSize="56dp" />
