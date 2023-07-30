@@ -1,9 +1,12 @@
 package com.example.airnotes.presentation.updateNote
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -37,6 +40,9 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         super.onViewCreated(view, savedInstanceState)
 
         val backToNotesListButton: FloatingActionButton = view.findViewById(R.id.backToNotesList)
+        val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
+
+        setTitleTextOptions(editNoteTitle)
 
         // receiving note args from navigation component
         val note = args.note
@@ -71,5 +77,11 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
             requireActivity().toast(getString(R.string.saveNoteMsg))
         }
         findNavController().navigate(R.id.action_updateNoteFragment_to_mainFragment)
+    }
+
+    // MAKE TITLE ACT AS MULTILINE BUT WITH ACTION NEXT ABILITY
+    private fun setTitleTextOptions(title: EditText) {
+        title.imeOptions = EditorInfo.IME_ACTION_NEXT
+        title.setRawInputType(InputType.TYPE_CLASS_TEXT)
     }
 }
