@@ -53,22 +53,21 @@
         <EditText
             android:id="@+id/editTitle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/text_size_medium_holder"
+            android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/lato_bold"
             android:hint="@string/noteTitleHint"
             android:textColorHint="@color/hint_gray"
-            android:gravity="start"
+            android:gravity="top"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_medium"
+            android:lineHeight="@dimen/text_size_medium_holder"
             android:textStyle="normal"
-            android:inputType="textCapSentences"
-            android:maxLength="65"
-            android:maxLines="1"
-            android:cursorVisible="true"
-            android:imeOptions="actionNext" />
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="130"
+            android:cursorVisible="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -90,7 +89,7 @@
         <EditText
             android:id="@+id/editDescription"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/text_size_small_holder"
+            android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:background="@android:color/transparent"

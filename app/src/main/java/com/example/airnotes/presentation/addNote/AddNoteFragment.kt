@@ -1,9 +1,11 @@
 package com.example.airnotes.presentation.addNote
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -38,6 +40,7 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         val backToNotesListButton: FloatingActionButton = view.findViewById(R.id.backToNotesList)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
 
+        setTitleTextOptions(editNoteTitle)
         openSoftKeyboard(editNoteTitle)
 
         // SAVE NOTE AND GO BACK TO THE MAIN SCREEN
@@ -63,5 +66,11 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
             it.editDescription.text.toString(),
             LocalDateTime.now()
         )
+    }
+
+    // MAKE TITLE ACT AS MULTILINE BUT WITH ACTION NEXT ABILITY
+    private fun setTitleTextOptions(title: EditText) {
+        title.imeOptions = EditorInfo.IME_ACTION_NEXT
+        title.setRawInputType(InputType.TYPE_CLASS_TEXT)
     }
 }
