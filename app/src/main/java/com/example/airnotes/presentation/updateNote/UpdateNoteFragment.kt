@@ -1,12 +1,9 @@
 package com.example.airnotes.presentation.updateNote
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -39,73 +36,17 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val saveNoteButton: FloatingActionButton = view.findViewById(R.id.saveNoteButton)
         val backToNotesListButton: FloatingActionButton = view.findViewById(R.id.backToNotesList)
-        val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
-        val editNoteDescription: EditText = view.findViewById(R.id.editDescription)
-
-        saveNoteButton.isEnabled = false
 
         // receiving note args from navigation component
         val note = args.note
-        val id = note.id
-
-        // LISTENING TITLE EDIT TEXT
-        editNoteTitle.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-                if(note.noteTitle != editNoteTitle.text.toString()) {
-                    saveNoteButton.isEnabled = true
-                } else if (note.noteTitle == editNoteTitle.text.toString()
-                    && note.noteDescription == editNoteDescription.text.toString()) {
-                    saveNoteButton.isEnabled = false
-                }
-            }
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-        })
-
-        // LISTENING DESCRIPTION EDIT TEXT
-        editNoteDescription.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-                if(note.noteDescription != editNoteDescription.text.toString()) {
-                    saveNoteButton.isEnabled = true
-                } else if (note.noteTitle == editNoteTitle.text.toString()
-                    && note.noteDescription == editNoteDescription.text.toString()) {
-                    saveNoteButton.isEnabled = false
-                }
-            }
-            override fun afterTextChanged(p0: Editable?) {}
-        })
 
         with(binding) {
             noteLayout.editTitle.setText(note.noteTitle)
             noteLayout.editDescription.setText(note.noteDescription)
 
             backToNotesListButton.setOnClickListener {
-                findNavController().navigate(R.id.action_updateNoteFragment_to_mainFragment)
-            }
-
-            saveNoteButton.setOnClickListener {
-                var (title, desc, date) = getNoteContent(note)
-                var updatedDate = LocalDateTime.now()
-
-                //SET NEW DATETIME ONLY IF NOTE HAS BEEN CHANGED
-                if(title != note.noteTitle && desc != note.noteDescription) {
-                    date = updatedDate
-                }
-
-                viewModel.updateNotes(id, title, desc, date).also {
-                    requireActivity().toast(getString(R.string.saveNoteMsg))
-                }
-                findNavController().navigate(R.id.action_updateNoteFragment_to_mainFragment)
+                updateNote(note)
             }
         }
     }
@@ -116,5 +57,19 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
             it.editDescription.text.toString(),
             note.date
         )
+    }
+
+    private fun updateNote(note: NoteEntity) {
+        var (title, desc, date) = getNoteContent(note)
+        val updatedDate = LocalDateTime.now()
+
+        //SET NEW DATETIME ONLY IF NOTE HAS BEEN CHANGED
+        if(title != note.noteTitle || desc != note.noteDescription) {
+            date = updatedDate
+        }
+        viewModel.updateNotes(note.id, title, desc, date).also {
+            requireActivity().toast(getString(R.string.saveNoteMsg))
+        }
+        findNavController().navigate(R.id.action_updateNoteFragment_to_mainFragment)
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text_size_tiny">11sp</dimen>
+
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_small_holder">20sp</dimen>
+
+    <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="text_size_medium_holder">24sp</dimen>
+
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_large_holder">28sp</dimen>
+
+</resources>
