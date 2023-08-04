@@ -21,8 +21,6 @@
     <string name="noteDescStub">Some description</string>
 
     <!-- DATES -->
-    <string name="today_us">Today</string>
-    <string name="today_ru">Сегодня</string>
-    <string name="yesterday_us">Yesterday</string>
-    <string name="yesterday_ru">Вчера</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
 </resources>

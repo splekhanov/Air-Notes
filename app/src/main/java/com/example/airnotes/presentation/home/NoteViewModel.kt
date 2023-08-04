@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airnotes.data.local.entities.NoteChecklist
 import com.example.airnotes.data.local.entities.NoteEntity
-import com.example.airnotes.data.repo.NoteRepo
 import com.example.airnotes.data.local.entities.NoteType
+import com.example.airnotes.data.repo.NoteRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -18,8 +18,13 @@ class NoteViewModel @Inject constructor(private val notesRepo: NoteRepo) : ViewM
 
     val getAllData: LiveData<List<NoteEntity>> = notesRepo.getAllNotes
 
-    // save note
-    fun addNote(noteTitle: String, noteType: NoteType, description: String, noteChecklist: List<NoteChecklist>, dateTime: LocalDateTime) {
+    fun addNote(
+        noteTitle: String,
+        noteType: NoteType,
+        description: String,
+        noteChecklist: List<NoteChecklist>,
+        dateTime: LocalDateTime
+    ) {
         viewModelScope.launch(IO) {
             val note = NoteEntity(
                 title = noteTitle,
@@ -32,8 +37,14 @@ class NoteViewModel @Inject constructor(private val notesRepo: NoteRepo) : ViewM
         }
     }
 
-    // update note
-    fun updateNotes(id: Long, noteTitle: String, description: String, noteType: NoteType, noteChecklist: List<NoteChecklist>, dateTime: LocalDateTime) {
+    fun updateNotes(
+        id: Long,
+        noteTitle: String,
+        description: String,
+        noteType: NoteType,
+        noteChecklist: List<NoteChecklist>,
+        dateTime: LocalDateTime
+    ) {
         viewModelScope.launch(IO) {
             val note = NoteEntity(
                 noteId = id,
@@ -47,10 +58,15 @@ class NoteViewModel @Inject constructor(private val notesRepo: NoteRepo) : ViewM
         }
     }
 
-    // delete note by ID
     fun deleteNoteByID(id: Long) {
         viewModelScope.launch(IO) {
             notesRepo.deleteNote(id)
+        }
+    }
+
+    fun deleteAllNotes() {
+        viewModelScope.launch(IO) {
+            notesRepo.deleteAllNotes()
         }
     }
 }

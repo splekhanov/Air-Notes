@@ -27,21 +27,20 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val viewModel: NoteViewModel by activityViewModels()
-    lateinit var binding: FragmentMainBinding
+    @Inject
+    lateinit var note: NoteEntity
 
     @Inject
     lateinit var noteRepo: NoteRepo
 
+    private val viewModel: NoteViewModel by activityViewModels()
+    lateinit var binding: FragmentMainBinding
     private val noteAdapter by lazy { NoteAdapter(arrayListOf()) }
-
-    @Inject
-    lateinit var note: NoteEntity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,7 +64,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun onClickNote() {
-        // onclick navigate to add notes
+        // ON CLICK NOTE FROM THE LIST OPENS NOTE TO EDIT
         noteAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("note", it)
@@ -80,11 +79,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun collectNotes() {
         binding.apply {
             viewModel.getAllData.observe(viewLifecycleOwner, Observer {
-                if(it.isNotEmpty()) {
+                if (it.isNotEmpty()) {
                     rvNoteList.visibility = View.VISIBLE
                     tvEmptyText.visibility = View.GONE
                     noteAdapter.setList(it)
-                    noteAdapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+                    noteAdapter.registerAdapterDataObserver(object :
+                        RecyclerView.AdapterDataObserver() {
                         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                             binding.rvNoteList.smoothScrollToPosition(0)
                         }
@@ -111,20 +111,20 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-
-                if(recyclerView.canScrollVertically(-1)) {
+                if (recyclerView.canScrollVertically(-1)) {
                     binding.toolbar.setBackgroundResource(R.color.medium_blue)
-                    binding.kebab.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.medium_blue))
+                    binding.kebab.backgroundTintList =
+                        ColorStateList.valueOf(resources.getColor(R.color.medium_blue))
                 } else {
                     binding.toolbar.setBackgroundResource(R.color.light_blue)
-                    binding.kebab.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_blue))
+                    binding.kebab.backgroundTintList =
+                        ColorStateList.valueOf(resources.getColor(R.color.light_blue))
                 }
             }
         })
     }
 
     private fun initSwipeToDeleteNote(recyclerView: RecyclerView) {
-        // init item touch callback for swipe action
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -138,7 +138,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // get item position & delete notes
+                // GET ITEM POSITION AND DELETE NOTE
                 val position = viewHolder.adapterPosition
                 val note = noteAdapter.noteList[position]
                 viewModel.deleteNoteByID(note.noteId).also {
@@ -151,7 +151,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private fun showBottomSheetDialog(kebab:FloatingActionButton) {
+    private fun showBottomSheetDialog(kebab: FloatingActionButton) {
         val bottomSheetDialog = ModalBottomSheet()
         kebab.setOnClickListener {
             bottomSheetDialog.show(parentFragmentManager, bottomSheetDialog.tag)

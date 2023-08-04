@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.airnotes.R
+import com.example.airnotes.data.local.entities.NoteType
 import com.example.airnotes.databinding.FragmentAddNoteBinding
 import com.example.airnotes.presentation.home.NoteViewModel
 import com.example.airnotes.utils.Focus.openSoftKeyboard
-import com.example.airnotes.data.local.entities.NoteType
 import com.example.airnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddNoteBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -40,7 +40,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
         val backToNotesListButton: FloatingActionButton = view.findViewById(R.id.backToNotesList)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
-        val editNoteDescription: EditText = view.findViewById(R.id.editDescription)
 
         setTitleTextOptions(editNoteTitle)
         openSoftKeyboard(editNoteTitle)
@@ -53,9 +52,10 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
                     findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
                 }
                 else -> {
-                    viewModel.addNote(title, NoteType.TEXT, description, emptyList(), timestamp).also {
-                        requireActivity().toast(getString(R.string.saveNoteMsg))
-                    }
+                    viewModel.addNote(title, NoteType.TEXT, description, emptyList(), timestamp)
+                        .also {
+                            requireActivity().toast(getString(R.string.saveNoteMsg))
+                        }
                     findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
                 }
             }

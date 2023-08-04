@@ -5,7 +5,6 @@ import com.example.airnotes.data.local.entities.NoteChecklist
 import com.google.gson.Gson
 import java.time.LocalDateTime
 
-
 class Converters {
 
     @TypeConverter
@@ -22,5 +21,6 @@ class Converters {
     fun listToJson(value: List<NoteChecklist>?) = Gson().toJson(value)
 
     @TypeConverter
-    fun jsonToList(value: String) = Gson().fromJson(value, Array<NoteChecklist>::class.java).toList()
+    fun jsonToList(value: String) =
+        Gson().fromJson(value, Array<NoteChecklist>::class.java).toList()
 }

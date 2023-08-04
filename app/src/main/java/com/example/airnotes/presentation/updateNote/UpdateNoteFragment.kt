@@ -31,7 +31,7 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentUpdateNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,7 +41,6 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
 
         val backToNotesListButton: FloatingActionButton = view.findViewById(R.id.backToNotesList)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
-        val editNoteDescription: EditText = view.findViewById(R.id.editDescription)
 
         setTitleTextOptions(editNoteTitle)
 
@@ -67,18 +66,19 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
     }
 
     private fun updateNote(note: NoteEntity) {
-        var (title, description, noteType) = getNoteContent(note)
+        val (title, description, noteType) = getNoteContent(note)
         val updatedDate = LocalDateTime.now()
         var noteDate = note.date
 
         //SET NEW DATETIME ONLY IF THE NOTE HAS BEEN CHANGED
-        if(title != note.title || description != note.description) {
+        if (title != note.title || description != note.description) {
             noteDate = updatedDate
         }
 
-        viewModel.updateNotes(note.noteId, title, description, noteType, emptyList(), noteDate).also {
-            requireActivity().toast(getString(R.string.saveNoteMsg))
-        }
+        viewModel.updateNotes(note.noteId, title, description, noteType, emptyList(), noteDate)
+            .also {
+                requireActivity().toast(getString(R.string.saveNoteMsg))
+            }
         findNavController().navigate(R.id.action_updateNoteFragment_to_mainFragment)
     }
 

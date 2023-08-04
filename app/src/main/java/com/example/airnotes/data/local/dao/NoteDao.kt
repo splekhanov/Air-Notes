@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.airnotes.data.local.entities.NoteChecklist
 import com.example.airnotes.data.local.entities.NoteEntity
-import com.example.airnotes.utils.Constants.NOTE_TABLE
 import com.example.airnotes.data.local.entities.NoteType
+import com.example.airnotes.utils.Constants.NOTE_TABLE
 
 @Dao
 interface NoteDao {
@@ -13,21 +13,19 @@ interface NoteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(noteEntity: NoteEntity) {
         val noteId = 0
-        if(noteEntity.noteType == NoteType.TEXT) {
+        if (noteEntity.noteType == NoteType.TEXT) {
             insertNoteEntity(noteEntity)
         }
     }
 
-    @Transaction
     @Update
     suspend fun updateNote(noteEntity: NoteEntity)
 
     @Query("DELETE FROM $NOTE_TABLE WHERE note_id = :id")
     suspend fun deleteNote(id: Long)
 
-//    @Transaction
-//    @Query("DELETE FROM $NOTE_TABLE")
-//    suspend fun deleteAllNotes()
+    @Query("DELETE FROM $NOTE_TABLE")
+    suspend fun deleteAllNotes()
 
     @Query("SELECT * FROM $NOTE_TABLE ORDER BY note_id DESC")
     fun getAllNotes(): LiveData<List<NoteEntity>>
@@ -37,7 +35,7 @@ interface NoteDao {
 
     // NOTE
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNoteEntity(noteEntity: NoteEntity) : Long
+    suspend fun insertNoteEntity(noteEntity: NoteEntity): Long
 
     @Query("DELETE FROM $NOTE_TABLE WHERE note_id = :id")
     suspend fun deleteNoteEntity(id: Long)

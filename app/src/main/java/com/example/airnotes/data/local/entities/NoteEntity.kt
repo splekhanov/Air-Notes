@@ -28,9 +28,9 @@ data class NoteEntity(
     var date: LocalDateTime = LocalDateTime.now(),
 
     @Ignore
-    var noteChecklist : List<NoteChecklist> = emptyList(),
+    var noteChecklist: List<NoteChecklist> = emptyList(),
 
-    )  : Serializable {
+    ) : Serializable {
 
     override fun toString(): String {
         return "$title"

@@ -7,13 +7,15 @@ import androidx.room.PrimaryKey
 import com.example.airnotes.utils.Constants
 import java.io.Serializable
 
-@Entity(tableName = Constants.CHECKLIST_TABLE,
+@Entity(
+    tableName = Constants.CHECKLIST_TABLE,
     foreignKeys = [ForeignKey(
         entity = NoteEntity::class,
         parentColumns = ["note_id"],
         childColumns = ["note_id"]
-    )])
-data class NoteChecklist (
+    )]
+)
+data class NoteChecklist(
 
     @PrimaryKey(autoGenerate = true)
     var checklistId: Long = 0,

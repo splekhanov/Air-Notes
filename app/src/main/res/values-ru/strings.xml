@@ -1,0 +1,26 @@
+<resources>
+    <string name="appName">Air Notes</string>
+
+    <!-- HINTS -->
+    <string name="noteTitleHint">Заголовок</string>
+    <string name="noteDescHint">Описание</string>
+    <string name="emptyMainScreenHolder">У вас пока нет заметок</string>
+    <string name="bottomSheet">Открыть настройки</string>
+    <string name="backToNotes">Вернуться к списку заметок</string>
+    <string name="saveNoteHint">Сохранить заметку</string>
+    <string name="saveEmptyNoteMsg">Заметка не может быть пустой</string>
+    <string name="saveNoteMsg">Сохранено</string>
+    <string name="checklist">Список</string>
+
+    <string name="undo">Отменить</string>
+    <string name="note_deleted_msg">Удалено</string>
+
+    <!-- STUBS -->
+    <string name="dateTimeStub">29 Июля 2023 9:36</string>
+    <string name="noteTitleStub">Важная заметка</string>
+    <string name="noteDescStub">Описание заметки</string>
+
+    <!-- DATES -->
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+</resources>
