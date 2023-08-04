@@ -85,6 +85,9 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.5.2'
     androidTestImplementation 'androidx.room:room-testing:2.5.2'
 
+    // Gson
+    implementation 'com.google.code.gson:gson:2.9.0'
+
     // RecyclerView Animator
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
 

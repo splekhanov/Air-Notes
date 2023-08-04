@@ -17,8 +17,8 @@ class NoteDiffUtil(
     override fun getNewListSize(): Int = newList.size
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
-                && oldList[oldItemPosition].noteTitle == newList[newItemPosition].noteTitle
-                && oldList[oldItemPosition].noteDescription == newList[newItemPosition].noteDescription
+        return oldList[oldItemPosition].title == newList[newItemPosition].title
+                && oldList[oldItemPosition].description == newList[newItemPosition].description
+                && oldList[oldItemPosition].noteChecklist == newList[newItemPosition].noteChecklist
     }
 }

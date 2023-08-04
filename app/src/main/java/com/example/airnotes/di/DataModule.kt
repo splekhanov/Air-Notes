@@ -30,4 +30,5 @@ class DataModule {
 
     @Provides
     fun provideEntity() = NoteEntity()
+
 }

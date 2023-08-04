@@ -141,7 +141,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 // get item position & delete notes
                 val position = viewHolder.adapterPosition
                 val note = noteAdapter.noteList[position]
-                viewModel.deleteNoteByID(note.id).also {
+                viewModel.deleteNoteByID(note.noteId).also {
                     requireActivity().toast(getString(R.string.note_deleted_msg))
                 }
             }

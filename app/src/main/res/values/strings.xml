@@ -10,6 +10,7 @@
     <string name="saveNoteHint">Save note</string>
     <string name="saveEmptyNoteMsg">Note cannot be empty</string>
     <string name="saveNoteMsg">Saved</string>
+    <string name="checklist">Note Checklist</string>
 
     <string name="undo">Undo</string>
     <string name="note_deleted_msg">Deleted</string>

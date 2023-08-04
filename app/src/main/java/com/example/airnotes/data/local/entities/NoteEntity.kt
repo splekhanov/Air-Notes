@@ -2,28 +2,37 @@ package com.example.airnotes.data.local.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.example.airnotes.utils.Constants.NOTE_TABLE
+import com.example.airnotes.utils.Constants
 import java.io.Serializable
 import java.time.LocalDateTime
 
-@Entity(tableName = NOTE_TABLE)
+@Entity(tableName = Constants.NOTE_TABLE)
 data class NoteEntity(
 
+    @ColumnInfo(name = "note_id", index = true)
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var noteId: Long = 0,
 
     @ColumnInfo(name = "note_title")
-    var noteTitle: String? = "",
+    var title: String? = "",
 
     @ColumnInfo(name = "note_description")
-    var noteDescription: String? = "",
+    var description: String? = "",
+
+    @ColumnInfo(name = "note_type")
+    var noteType: NoteType = NoteType.TEXT,
 
     @ColumnInfo(name = "date")
-    val date: LocalDateTime = LocalDateTime.now()
+    var date: LocalDateTime = LocalDateTime.now(),
 
-    ) : Serializable {
+    @Ignore
+    var noteChecklist : List<NoteChecklist> = emptyList(),
+
+    )  : Serializable {
+
     override fun toString(): String {
-        return "$noteDescription"
+        return "$title"
     }
 }

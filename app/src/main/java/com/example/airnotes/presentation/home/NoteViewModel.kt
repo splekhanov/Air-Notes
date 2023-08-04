@@ -3,8 +3,10 @@ package com.example.airnotes.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.airnotes.data.local.entities.NoteChecklist
 import com.example.airnotes.data.local.entities.NoteEntity
 import com.example.airnotes.data.repo.NoteRepo
+import com.example.airnotes.data.local.entities.NoteType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -17,32 +19,36 @@ class NoteViewModel @Inject constructor(private val notesRepo: NoteRepo) : ViewM
     val getAllData: LiveData<List<NoteEntity>> = notesRepo.getAllNotes
 
     // save note
-    fun addNote(taskName: String, taskDesc: String, dateTime: LocalDateTime) {
+    fun addNote(noteTitle: String, noteType: NoteType, description: String, noteChecklist: List<NoteChecklist>, dateTime: LocalDateTime) {
         viewModelScope.launch(IO) {
-            val notes = NoteEntity(
-                noteTitle = taskName,
-                noteDescription = taskDesc,
+            val note = NoteEntity(
+                title = noteTitle,
+                noteType = noteType,
+                description = description,
+                noteChecklist = noteChecklist,
                 date = dateTime
             )
-            notesRepo.addNote(notes)
+            notesRepo.addNote(note)
         }
     }
 
     // update note
-    fun updateNotes(id: Int, taskName: String, taskDesc: String, dateTime: LocalDateTime) {
+    fun updateNotes(id: Long, noteTitle: String, description: String, noteType: NoteType, noteChecklist: List<NoteChecklist>, dateTime: LocalDateTime) {
         viewModelScope.launch(IO) {
-            val notes = NoteEntity(
-                id = id,
-                noteTitle = taskName,
-                noteDescription = taskDesc,
+            val note = NoteEntity(
+                noteId = id,
+                title = noteTitle,
+                noteType = noteType,
+                description = description,
+                noteChecklist = noteChecklist,
                 date = dateTime
             )
-            notesRepo.updateNote(notes)
+            notesRepo.updateNote(note)
         }
     }
 
     // delete note by ID
-    fun deleteNoteByID(id: Int) {
+    fun deleteNoteByID(id: Long) {
         viewModelScope.launch(IO) {
             notesRepo.deleteNote(id)
         }

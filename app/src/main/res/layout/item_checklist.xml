@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/dark_gray"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/bullet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_weight="1"
+                android:elevation="0dp"
+                android:layout_gravity="center"
+                app:elevation="0dp"
+                app:fabCustomSize="12dp"
+                app:maxImageSize="12dp"
+                app:borderWidth="0dp"
+                app:tint="@color/fab_color"
+                android:backgroundTint="@color/air_white"
+                android:contentDescription="@string/checklist"
+                android:src="@drawable/checklist_circle_24"
+                app:layout_constraintEnd_toStartOf="@+id/listElement"/>
+
+            <EditText
+                android:id="@+id/listElement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:textStyle="normal"
+                android:text="@string/noteTitleStub"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small"
+                android:lastBaselineToBottomHeight="6sp"
+                android:background="@android:color/transparent"
+                android:inputType="textMultiLine"
+                app:layout_constraintStart_toEndOf="@+id/bullet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

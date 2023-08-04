@@ -2,27 +2,47 @@ package com.example.airnotes.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.airnotes.data.local.entities.NoteChecklist
 import com.example.airnotes.data.local.entities.NoteEntity
 import com.example.airnotes.utils.Constants.NOTE_TABLE
+import com.example.airnotes.data.local.entities.NoteType
 
 @Dao
 interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNote(noteEntity: NoteEntity)
+    suspend fun insertNote(noteEntity: NoteEntity) {
+        val noteId = 0
+        if(noteEntity.noteType == NoteType.TEXT) {
+            insertNoteEntity(noteEntity)
+        }
+    }
 
+    @Transaction
     @Update
     suspend fun updateNote(noteEntity: NoteEntity)
 
-    @Query("DELETE FROM $NOTE_TABLE WHERE id = :id")
-    suspend fun deleteNote(id: Int)
+    @Query("DELETE FROM $NOTE_TABLE WHERE note_id = :id")
+    suspend fun deleteNote(id: Long)
 
-    @Query("DELETE FROM $NOTE_TABLE")
-    suspend fun deleteAllNotes()
+//    @Transaction
+//    @Query("DELETE FROM $NOTE_TABLE")
+//    suspend fun deleteAllNotes()
 
-    @Query("SELECT * FROM $NOTE_TABLE ORDER BY id DESC")
+    @Query("SELECT * FROM $NOTE_TABLE ORDER BY note_id DESC")
     fun getAllNotes(): LiveData<List<NoteEntity>>
 
-    @Query("SELECT * FROM $NOTE_TABLE WHERE id like :id")
-    suspend fun getNote(id: Int): NoteEntity
+    @Query("SELECT * FROM $NOTE_TABLE WHERE note_id like :id")
+    suspend fun getNote(id: Long): NoteEntity
+
+    // NOTE
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNoteEntity(noteEntity: NoteEntity) : Long
+
+    @Query("DELETE FROM $NOTE_TABLE WHERE note_id = :id")
+    suspend fun deleteNoteEntity(id: Long)
+
+    // NOTE CHECKLIST
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertChecklist(noteChecklist: NoteChecklist)
 }

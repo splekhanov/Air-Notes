@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.airnotes.R
 import com.example.airnotes.data.local.entities.NoteEntity
 import com.example.airnotes.databinding.ItemNoteBinding
+import com.example.airnotes.data.local.entities.NoteType
 import com.example.airnotes.utils.isToday
 import com.example.airnotes.utils.isYesterday
 import java.time.format.DateTimeFormatter
@@ -30,18 +31,20 @@ class NoteAdapter (var noteList : List<NoteEntity>) : RecyclerView.Adapter<NoteA
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        val item = noteList[position]
+        val note = noteList[position]
         holder.binding.apply {
 
-            tvTitle.text = item.noteTitle
-            tvDesc.text = item.noteDescription
+            tvTitle.text = note.title
+            if(note.noteType == NoteType.TEXT) {
+                tvDesc.text = note.description
+            }
 
-            var formattedDate = getFormattedDate(item)
+            val formattedDate = getFormattedDate(note)
             date.text = formattedDate
 
             // ON LIST ITEM CLICK
             holder.itemView.setOnClickListener {
-                onItemClickListener?.let { it(item) }
+                onItemClickListener?.let { it(note) }
             }
         }
     }

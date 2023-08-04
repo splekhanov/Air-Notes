@@ -14,6 +14,7 @@ import com.example.airnotes.R
 import com.example.airnotes.databinding.FragmentAddNoteBinding
 import com.example.airnotes.presentation.home.NoteViewModel
 import com.example.airnotes.utils.Focus.openSoftKeyboard
+import com.example.airnotes.data.local.entities.NoteType
 import com.example.airnotes.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,19 +40,20 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
         val backToNotesListButton: FloatingActionButton = view.findViewById(R.id.backToNotesList)
         val editNoteTitle: EditText = view.findViewById(R.id.editTitle)
+        val editNoteDescription: EditText = view.findViewById(R.id.editDescription)
 
         setTitleTextOptions(editNoteTitle)
         openSoftKeyboard(editNoteTitle)
 
         // SAVE NOTE AND GO BACK TO THE MAIN SCREEN
         backToNotesListButton.setOnClickListener {
-            val (title, note, timestamp) = getNoteContent()
+            val (title, description, timestamp) = getNoteContent()
             when {
-                title.isEmpty() && note.isEmpty() -> {
+                title.isEmpty() && description.isEmpty() -> {
                     findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
                 }
                 else -> {
-                    viewModel.addNote(title, note, timestamp).also {
+                    viewModel.addNote(title, NoteType.TEXT, description, emptyList(), timestamp).also {
                         requireActivity().toast(getString(R.string.saveNoteMsg))
                     }
                     findNavController().navigate(R.id.action_addNoteFragment_to_mainFragment)
