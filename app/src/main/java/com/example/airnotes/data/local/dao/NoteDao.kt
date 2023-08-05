@@ -11,11 +11,12 @@ import com.example.airnotes.utils.Constants.NOTE_TABLE
 interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNote(noteEntity: NoteEntity) {
-        val noteId = 0
+    suspend fun insertNote(noteEntity: NoteEntity): Long {
+        var noteId = 0L
         if (noteEntity.noteType == NoteType.TEXT) {
-            insertNoteEntity(noteEntity)
+            noteId = insertNoteEntity(noteEntity)
         }
+        return noteId
     }
 
     @Update
