@@ -45,6 +45,7 @@
             app:maxImageSize="48dp"
             app:borderWidth="0dp"
             app:backgroundTint="@color/light_blue"
+            app:tint="@color/black"
             android:layout_gravity="end|center_vertical"
             android:contentDescription="@string/bottomSheet"
             android:src="@drawable/ic_kebab_24"/>
@@ -76,7 +77,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/emptyMainScreenHolder"
-        android:fontFamily="@font/roboto_regular"
+        android:fontFamily="@font/lato_regular"
         android:textColor="@color/light_grey"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

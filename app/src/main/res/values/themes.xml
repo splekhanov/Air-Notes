@@ -1,14 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MyApplication" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.MyApplication" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/gray</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="colorPrimaryDark">@color/dark_gray</item>
-        <item name="colorAccent">@color/pink</item>
-        <item name="backgroundTint">@color/dark_blue</item>
+        <item name="colorAccent">@color/green</item>
         <!-- Status bar color. -->
         <item name="android:navigationBarColor">@color/light_blue</item>
-        <item name="android:colorEdgeEffect">@color/medium_blue</item>
+        <item name="android:colorEdgeEffect">@color/green</item>
     </style>
 </resources>

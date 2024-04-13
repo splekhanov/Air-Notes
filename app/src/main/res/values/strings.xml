@@ -23,4 +23,8 @@
     <!-- DATES -->
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
+
+    <!-- BOTTOM SHEET -->
+    <string name="theme">Theme</string>
+    <string name="sort">Sort By</string>
 </resources>
